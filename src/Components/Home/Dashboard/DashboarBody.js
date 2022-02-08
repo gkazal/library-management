@@ -5,6 +5,9 @@ import React from "react";
 import { Icon } from "@iconify/react";
 import img from "../../../images/dashboard/home.png";
 import { NavBookRequestButton } from "../../../Styles/globalStyled";
+import StudentCard from "../../../Shared/TotalCard/StudentCard";
+import BookCard from "../../../Shared/TotalCard/BookCard";
+import { Book } from "@mui/icons-material";
 
 const useStyles = makeStyles({
   root: {
@@ -59,7 +62,15 @@ const DashboarBody = () => {
   return (
     <>
       <Grid container justifyContent="center">
-        <Grid item lg={8} className={classes.root}>
+        <Grid
+          item
+          xl={8}
+          lg={10}
+          md={10}
+          sm={10}
+          xs={11}
+          className={classes.root}
+        >
           <Box py={5}>
             <Typography align="center">
               <span style={{ color: "#009A6B", fontSize: "20px" }}>
@@ -73,147 +84,24 @@ const DashboarBody = () => {
           </Box>
 
           <Box>
-            <Grid container spacing="20">
+            <Grid container spacing="20" justifyContent="center">
               <Grid item lg={3}>
-                <Card className={classes.card}>
-                  <CardContent>
-                    <Grid container spacing={5}>
-                      <Grid item>
-                        <Typography>
-                          7555 <br />
-                          Total Sudents
-                        </Typography>
-                      </Grid>
-                      <Grid item>
-                        <Box>
-                          <Icon
-                            icon="ant-design:user-outlined"
-                            width="30"
-                            height="30"
-                          />
-                        </Box>
-                      </Grid>
-                    </Grid>
-                  </CardContent>
-                </Card>
+                <StudentCard />
               </Grid>
               <Grid item lg={3}>
-                <Card className={classes.card}>
-                  <CardContent>
-                    <Grid container spacing={5}>
-                      <Grid item>
-                        <Typography>
-                          7555 <br />
-                          Total Sudents
-                        </Typography>
-                      </Grid>
-                      <Grid item>
-                        <Box>
-                          <Icon
-                            icon="bx:bx-book"
-                            color="green"
-                            width="30"
-                            height="30"
-                          />
-                        </Box>
-                      </Grid>
-                    </Grid>
-                  </CardContent>
-                </Card>
+                <StudentCard />
               </Grid>
               <Grid item lg={3}>
-                <Card className={classes.card}>
-                  <CardContent>
-                    <Grid container spacing={5}>
-                      <Grid item>
-                        <Typography>
-                          7555 <br />
-                          Total Sudents
-                        </Typography>
-                      </Grid>
-                      <Grid item>
-                        <Box>
-                          <Icon
-                            icon="bx:bx-book"
-                            color="green"
-                            width="30"
-                            height="30"
-                          />
-                        </Box>
-                      </Grid>
-                    </Grid>
-                  </CardContent>
-                </Card>
+                <BookCard />
               </Grid>
               <Grid item lg={3}>
-                <Card className={classes.card}>
-                  <CardContent>
-                    <Grid container spacing={5}>
-                      <Grid item>
-                        <Typography>
-                          7555 <br />
-                          Total Sudents
-                        </Typography>
-                      </Grid>
-                      <Grid item>
-                        <Box>
-                          <Icon
-                            icon="bx:bx-book"
-                            color="green"
-                            width="30"
-                            height="30"
-                          />
-                        </Box>
-                      </Grid>
-                    </Grid>
-                  </CardContent>
-                </Card>
+                <BookCard />
               </Grid>
               <Grid item lg={3}>
-                <Card className={classes.card}>
-                  <CardContent>
-                    <Grid container spacing={5}>
-                      <Grid item>
-                        <Typography>
-                          7555 <br />
-                          Total Sudents
-                        </Typography>
-                      </Grid>
-                      <Grid item>
-                        <Box>
-                          <Icon
-                            icon="ant-design:user-outlined"
-                            width="30"
-                            height="30"
-                          />
-                        </Box>
-                      </Grid>
-                    </Grid>
-                  </CardContent>
-                </Card>
+                <BookCard />
               </Grid>
               <Grid item lg={3}>
-                <Card className={classes.card}>
-                  <CardContent>
-                    <Grid container spacing={5}>
-                      <Grid item>
-                        <Typography>
-                          7555 <br />
-                          Total Sudents
-                        </Typography>
-                      </Grid>
-                      <Grid item>
-                        <Box>
-                          <Icon
-                            icon="ant-design:user-outlined"
-                            width="30"
-                            height="30"
-                          />
-                        </Box>
-                      </Grid>
-                    </Grid>
-                  </CardContent>
-                </Card>
+                <StudentCard />
               </Grid>
             </Grid>
           </Box>

@@ -54,7 +54,7 @@ const useStyles = makeStyles({
   },
 });
 
-const DashboardTab = () => {
+const StudentTab = () => {
   const classes = useStyles();
 
   const [field, setField] = useState("dashboard");
@@ -72,7 +72,7 @@ const DashboardTab = () => {
   };
 
   return (
-    <Grid container className={classes.tabBox}>
+    <Grid container className={classes.tabBox} justifyContent="center">
       <Grid item lg={3} md={3} sm={3} xs={12}>
         <Box className={classes.rightBorder}>
           <Typography
@@ -82,23 +82,7 @@ const DashboardTab = () => {
             align="center"
             sx={{ padding: "10px" }}
           >
-            Dashboard <br />
-            <span style={{ color: "#8D8D8D", fontSize: "14px" }}>
-              Data & Statistics
-            </span>
-          </Typography>
-        </Box>
-      </Grid>
-      <Grid item lg={3} md={3} sm={3} xs={12}>
-        <Box className={classes.rightBorder}>
-          <Typography
-            variant="h6"
-            onClick={handleStudent}
-            className={field === "student" && classes.activeTab}
-            align="center"
-            sx={{ padding: "10px" }}
-          >
-            Manage Student <br />
+            Request <br />
             <span style={{ color: "#8D8D8D", fontSize: "14px" }}>
               Student Information
             </span>
@@ -106,37 +90,23 @@ const DashboardTab = () => {
         </Box>
       </Grid>
       <Grid item lg={3} md={3} sm={3} xs={12}>
-        <Box className={classes.rightBorder}>
+        <Box>
           <Typography
             variant="h6"
-            className={field === "borrower" && classes.activeTab}
+            onClick={handleStudent}
+            className={field === "student" && classes.activeTab}
             align="center"
             sx={{ padding: "10px" }}
-            onClick={handleBorrower}
           >
-            Manage Borrower <br />{" "}
+            Borrow History <br />
             <span style={{ color: "#8D8D8D", fontSize: "14px" }}>
-              Borrower Information
+              Your Borrow History
             </span>
           </Typography>
         </Box>
-      </Grid>
-      <Grid item lg={3} md={3} sm={3} xs={12}>
-        <Typography
-          variant="h6"
-          className={field === "book" && classes.activeTab}
-          align="center"
-          sx={{ padding: "10px" }}
-          onClick={handleBook}
-        >
-          Manage Book <br />{" "}
-          <span style={{ color: "#8D8D8D", fontSize: "14px" }}>
-            Managing All Books
-          </span>
-        </Typography>
       </Grid>
     </Grid>
   );
 };
 
-export default DashboardTab;
+export default StudentTab;

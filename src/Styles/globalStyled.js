@@ -16,3 +16,27 @@ export const NavBookRequestButton = withStyles(() => ({
     height: "46px !important",
   },
 }))(Button);
+
+export const BookRequestText = withStyles(() => ({
+  root: {
+    fontSize: "18px !important",
+    fontWeight: "600 !important",
+    color: "#009A6B",
+  },
+}))(Typography);
+
+export const AddButton = withStyles(() => ({
+  root: {
+    textTransform: "none !important",
+
+    color: "white !important",
+    backgroundColor: "#009A6B !important",
+    padding: "10px !important",
+    borderRadius: "23px !important",
+    outline: "none !important",
+    fontSize: "14px !important",
+    fontWeight: "500!important",
+    width: "154px !important",
+    height: "46px !important",
+  },
+}))(Button);
