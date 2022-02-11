@@ -41,7 +41,7 @@ const useStyles = makeStyles({
     },
   },
 });
-const BookCard = () => {
+const BookCard = ({ books }) => {
   const classes = useStyles();
   return (
     <>
@@ -51,7 +51,7 @@ const BookCard = () => {
             <Grid item>
               <Typography>
                 7555 <br />
-                Book Request
+                {books}
               </Typography>
             </Grid>
             <Grid item>

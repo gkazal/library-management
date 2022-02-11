@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import "./App.css";
 import Login from "./Components/Auth/Login/Login";
@@ -13,6 +14,15 @@ import StudentDashboard from "./Components/Home/StudentDashboard/StudentDashboar
 import StudentProfile from "./Components/Home/StudentDashboard/StudentProfile";
 
 function App() {
+  // useEffect(() => {
+  //   fetch("http://localhost:5500/settings/departments", {
+  //     method: "GET",
+  //   })
+  //     .then((res) => res.json())
+  //     .then((res) => console.log(res))
+  //     .catch((err) => console.log(err));
+  // }, []);
+
   return (
     <Router>
       <Switch>

@@ -1,13 +1,16 @@
 import { Card, CardContent, Grid, Typography } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { Box } from "@mui/system";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Icon } from "@iconify/react";
 import img from "../../../images/dashboard/home.png";
 import { NavBookRequestButton } from "../../../Styles/globalStyled";
 import StudentCard from "../../../Shared/TotalCard/StudentCard";
 import BookCard from "../../../Shared/TotalCard/BookCard";
 import { Book } from "@mui/icons-material";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchStudentsSummery } from "../../../store/actions/studentsSummeryAction";
+import { fetchAllStudents } from "../../../store/actions/allStudentsAction";
 
 const useStyles = makeStyles({
   root: {
@@ -58,7 +61,26 @@ const useStyles = makeStyles({
   },
 });
 const DashboarBody = () => {
+  const dispatch = useDispatch();
   const classes = useStyles();
+
+  useEffect(() => {
+    dispatch(fetchStudentsSummery());
+  }, [dispatch]);
+  useEffect(() => {
+    dispatch(fetchAllStudents());
+  }, [dispatch]);
+
+  const studentsSummery = useSelector(
+    (state) => state.studentsSummery.studentsSummery
+  );
+  console.log(studentsSummery.length);
+
+  const allStudents = useSelector((state) => state.allStudents.allStudents);
+  console.log(allStudents.length);
+  const studentCount = allStudents.length;
+  console.log(studentCount);
+
   return (
     <>
       <Grid container justifyContent="center">
@@ -86,22 +108,25 @@ const DashboarBody = () => {
           <Box>
             <Grid container spacing="20" justifyContent="center">
               <Grid item lg={3}>
-                <StudentCard />
+                <StudentCard
+                  studentCount={studentCount}
+                  students={"Total Students"}
+                />
               </Grid>
               <Grid item lg={3}>
-                <StudentCard />
+                <BookCard books={"Books Available"} />
               </Grid>
               <Grid item lg={3}>
-                <BookCard />
+                <BookCard books={"Books Borrowed"} />
               </Grid>
               <Grid item lg={3}>
-                <BookCard />
+                <BookCard books={"Overdue Books"} />
               </Grid>
               <Grid item lg={3}>
-                <BookCard />
+                <StudentCard students={"Inactive Students"} />
               </Grid>
               <Grid item lg={3}>
-                <StudentCard />
+                <StudentCard students={"Activation Request"} />
               </Grid>
             </Grid>
           </Box>

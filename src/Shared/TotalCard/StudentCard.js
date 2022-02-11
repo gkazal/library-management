@@ -41,7 +41,7 @@ const useStyles = makeStyles({
     },
   },
 });
-const StudentCard = () => {
+const StudentCard = ({ studentCount, students }) => {
   const classes = useStyles();
   return (
     <>
@@ -50,8 +50,8 @@ const StudentCard = () => {
           <Grid container spacing={5}>
             <Grid item>
               <Typography>
-                7555 <br />
-                Book Request
+                {studentCount} <br />
+                {students}
               </Typography>
             </Grid>
             <Grid item>
