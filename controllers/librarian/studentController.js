@@ -166,7 +166,8 @@ const getStudent = async (req, res) => {
   try {
     const student = await User.findOne({
       where: {
-        id: req.params.id,
+        // student access id dia single student show hobe...
+        student_access_id: req.params.studentAccessId,
       },
       include: [
         { model: Department, attributes: ["name"] },
@@ -187,28 +188,67 @@ const getStudent = async (req, res) => {
   }
 };
 
+// ekane student ar info gula sob updata kora jabe...
 const studentStatusChange = async (req, res) => {
   try {
     const student = await User.findOne({
       where: {
-        id: req.params.id,
+        // student student id dia data show hobe..and change hobe..
+        student_access_id: req.params.studentAccessId,
       },
     });
 
     if (student) {
-      let status = req.body.status;
+      let status = req.body.status || student.status;
+      // let email = req.body.email || student.email;
+      let phone = req.body.phone || student.phone;
+      let password = req.body.password || student.password;
 
       student.update(
-        { status },
+        { status, phone, password },
         {
           where: {
-            id: req.params.id,
+            student_access_id: req.params.student_access_id,
           },
         }
       );
 
       return res.status(200).json({
         status: "success",
+        data: student,
+      });
+    } else {
+      itemNotFound(res, 404, "Student not found");
+    }
+  } catch (e) {
+    serverError(res, e);
+  }
+};
+
+const destroyStudent = async (req, res) => {
+  try {
+    const student = await User.findOne({
+      where: {
+        // sudent access id dia id delete hobe..
+        student_access_id: req.params.studentAccessId,
+      },
+    });
+
+    if (student) {
+      let status = req.body.status;
+
+      student.destroy(
+        { status },
+        {
+          where: {
+            student_access_id: req.params.studentAccessId,
+          },
+        }
+      );
+
+      return res.status(200).json({
+        status: "success",
+        message: "Department deleted successfully",
         data: student,
       });
     } else {
@@ -228,4 +268,5 @@ module.exports = {
   store,
   getStudent,
   studentStatusChange,
+  destroyStudent,
 };

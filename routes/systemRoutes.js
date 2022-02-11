@@ -7,9 +7,10 @@ const router = require("express").Router();
 
 // for create table only...
 router.get("/db-migrate", async (req, res) => {
-  // await Department.drop();
-  // await Batch.drop();
+  // user bathc and department table data all drop hoye jabe...
   await User.drop();
+  await Batch.drop();
+  await Department.drop();
   sequelize.sync();
 
   console.log("Table migrate to database");
