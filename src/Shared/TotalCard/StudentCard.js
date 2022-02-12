@@ -41,7 +41,7 @@ const useStyles = makeStyles({
     },
   },
 });
-const StudentCard = ({ studentCount, students }) => {
+const StudentCard = ({ count, students }) => {
   const classes = useStyles();
   return (
     <>
@@ -50,7 +50,11 @@ const StudentCard = ({ studentCount, students }) => {
           <Grid container spacing={5}>
             <Grid item>
               <Typography>
-                {studentCount} <br />
+                <span style={{ fontSize: "22px", fontWeight: "bold" }}>
+                  {" "}
+                  {count}
+                </span>{" "}
+                <br />
                 {students}
               </Typography>
             </Grid>

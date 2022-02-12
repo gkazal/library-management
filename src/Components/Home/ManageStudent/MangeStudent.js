@@ -1,7 +1,5 @@
 import { Icon } from "@iconify/react";
 import {
-  Card,
-  CardContent,
   Dialog,
   DialogContent,
   FormControl,
@@ -15,11 +13,11 @@ import { Box } from "@mui/system";
 import React, { useState } from "react";
 import StudentCard from "../../../Shared/TotalCard/StudentCard";
 import { AddButton, BookRequestText } from "../../../Styles/globalStyled";
-import DashboardTab from "../Dashboard/DashboardTab";
-import Navbar from "../Navbar/Navbar";
+
 import SearchIcon from "@mui/icons-material/Search";
 import ManageStudentTable from "./MangeStudentTable";
 import AddStudent from "./AddStudent";
+import { useSelector } from "react-redux";
 
 const useStyles = makeStyles({
   textField: {
@@ -70,22 +68,31 @@ const MangeStudent = () => {
     setOpen(false);
   };
 
+  const allStudents = useSelector((state) => state.allStudents.allStudents);
+  const studentCount = allStudents.length;
+
+  const inactiveStudents = useSelector(
+    (state) => state.inactiveStudents.inactiveStudents
+  );
+  const inactiveStudentsCount = inactiveStudents.length;
+
   return (
     <>
-      <Navbar />
-      <DashboardTab />
       <Grid container justifyContent="center">
         <Grid item xl={8} lg={10} md={10} sm={12} xs={12}>
           <Box mt={10}>
             <Grid container justifyContent="center" spacing={5}>
               <Grid item lg={3}>
-                <StudentCard />
+                <StudentCard count={studentCount} students={"Total Students"} />
               </Grid>
               <Grid item lg={3}>
-                <StudentCard />
+                <StudentCard
+                  count={inactiveStudentsCount}
+                  students={"Inactive Students"}
+                />
               </Grid>
               <Grid item lg={3}>
-                <StudentCard />
+                <StudentCard students={"Inactive Students"} />
               </Grid>
             </Grid>
           </Box>

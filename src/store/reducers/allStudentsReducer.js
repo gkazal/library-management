@@ -2,6 +2,7 @@ import * as types from "../types";
 
 const initialStates = {
   allStudents: [],
+  students: {},
 };
 
 const allStudents = (state = initialStates, action) => {
@@ -10,6 +11,11 @@ const allStudents = (state = initialStates, action) => {
       return {
         ...state,
         allStudents: action.payload,
+      };
+    case types.FETCH_SINGLE_STUDENT:
+      return {
+        ...state,
+        students: action.payload,
       };
 
     default:

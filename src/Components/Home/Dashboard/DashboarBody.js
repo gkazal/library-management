@@ -1,16 +1,16 @@
-import { Card, CardContent, Grid, Typography } from "@mui/material";
+import { Grid, Typography } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { Box } from "@mui/system";
-import React, { useEffect, useState } from "react";
-import { Icon } from "@iconify/react";
+import React, { useEffect } from "react";
 import img from "../../../images/dashboard/home.png";
 import { NavBookRequestButton } from "../../../Styles/globalStyled";
 import StudentCard from "../../../Shared/TotalCard/StudentCard";
 import BookCard from "../../../Shared/TotalCard/BookCard";
-import { Book } from "@mui/icons-material";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchStudentsSummery } from "../../../store/actions/studentsSummeryAction";
 import { fetchAllStudents } from "../../../store/actions/allStudentsAction";
+import { fetchInactiveStudents } from "../../../store/actions/inactiveStudentsAction";
+import { fetchAllDepartments } from "../../../store/actions/allDepartmentsAction";
 
 const useStyles = makeStyles({
   root: {
@@ -67,8 +67,17 @@ const DashboarBody = () => {
   useEffect(() => {
     dispatch(fetchStudentsSummery());
   }, [dispatch]);
+
   useEffect(() => {
     dispatch(fetchAllStudents());
+  }, [dispatch]);
+
+  useEffect(() => {
+    dispatch(fetchInactiveStudents());
+  }, [dispatch]);
+
+  useEffect(() => {
+    dispatch(fetchAllDepartments());
   }, [dispatch]);
 
   const studentsSummery = useSelector(
@@ -77,9 +86,12 @@ const DashboarBody = () => {
   console.log(studentsSummery.length);
 
   const allStudents = useSelector((state) => state.allStudents.allStudents);
-  console.log(allStudents.length);
   const studentCount = allStudents.length;
-  console.log(studentCount);
+
+  const inactiveStudents = useSelector(
+    (state) => state.inactiveStudents.inactiveStudents
+  );
+  const inactiveStudentsCount = inactiveStudents.length;
 
   return (
     <>
@@ -108,10 +120,7 @@ const DashboarBody = () => {
           <Box>
             <Grid container spacing="20" justifyContent="center">
               <Grid item lg={3}>
-                <StudentCard
-                  studentCount={studentCount}
-                  students={"Total Students"}
-                />
+                <StudentCard count={studentCount} students={"Total Students"} />
               </Grid>
               <Grid item lg={3}>
                 <BookCard books={"Books Available"} />
@@ -123,7 +132,10 @@ const DashboarBody = () => {
                 <BookCard books={"Overdue Books"} />
               </Grid>
               <Grid item lg={3}>
-                <StudentCard students={"Inactive Students"} />
+                <StudentCard
+                  count={inactiveStudentsCount}
+                  students={"Inactive Students"}
+                />
               </Grid>
               <Grid item lg={3}>
                 <StudentCard students={"Activation Request"} />

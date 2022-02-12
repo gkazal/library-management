@@ -1,12 +1,15 @@
 import { Grid, Typography } from "@mui/material";
 import { Box } from "@mui/system";
-import React from "react";
+import React, { useEffect } from "react";
 import DashboardTab from "../Dashboard/DashboardTab";
 import Navbar from "../Navbar/Navbar";
 import img from "../../../images/dashboard/student.png";
 import { makeStyles } from "@mui/styles";
 import { AddButton, BookRequestText } from "../../../Styles/globalStyled";
 import StudentDetailTable from "./StudentDetailTable";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchSingleStudent } from "../../../store/actions/allStudentsAction";
+import { useParams } from "react-router-dom";
 
 const useStyles = makeStyles({
   box: {
@@ -20,10 +23,22 @@ const useStyles = makeStyles({
 
 const StudentDetails = () => {
   const classes = useStyles();
+  const { studentAccessId } = useParams();
+
+  const dispatch = useDispatch();
+  useEffect(() => {
+    if (studentAccessId) {
+      dispatch(fetchSingleStudent(studentAccessId));
+    }
+  }, [dispatch, studentAccessId]);
+
+  const singleStudent = useSelector((state) => state.allStudents.students);
+  console.log(singleStudent);
+
   return (
     <>
       <Navbar />
-      <DashboardTab />
+      {/* <DashboardTab /> */}
       <Grid container justifyContent="center" mt={5}>
         <Grid item lg={6} md={6} sm={8} xs={11} className={classes.box}>
           <Grid container justifyContent="center">
@@ -33,7 +48,7 @@ const StudentDetails = () => {
                 style={{
                   width: "200px",
                 }}
-                src={img}
+                src={singleStudent?.avatar}
                 alt=""
               />
             </Grid>
@@ -43,13 +58,13 @@ const StudentDetails = () => {
               <Typography mb={1} mt={2}>
                 Student ID
               </Typography>
-              <Typography> 011133097</Typography>
+              <Typography> {singleStudent?.student_access_id}</Typography>
             </Grid>
             <Grid item lg={3} md={4} sm={4} xs={5}>
               <Typography mb={1} mt={2}>
                 Student Name
               </Typography>
-              <Typography> Kazal Ghosh</Typography>
+              <Typography> {singleStudent?.name}</Typography>
             </Grid>
           </Grid>
           <Grid container>
@@ -57,13 +72,13 @@ const StudentDetails = () => {
               <Typography mb={1} mt={2}>
                 Select Department
               </Typography>
-              <Typography> Computer Science</Typography>
+              <Typography> {singleStudent?.department?.name}</Typography>
             </Grid>
             <Grid item lg={3} md={4} sm={4} xs={5}>
               <Typography mb={1} mt={2}>
                 Batch
               </Typography>
-              <Typography> 133</Typography>
+              <Typography> {singleStudent?.batch?.name}</Typography>
             </Grid>
           </Grid>
           <Grid container>
@@ -71,13 +86,13 @@ const StudentDetails = () => {
               <Typography mb={1} mt={2}>
                 Email
               </Typography>
-              <Typography> mrgkazal@gmail.com</Typography>
+              <Typography> {singleStudent?.email}</Typography>
             </Grid>
             <Grid item lg={3} md={4} sm={4} xs={5}>
               <Typography mb={1} mt={2}>
                 Contact No
               </Typography>
-              <Typography> 01732592451</Typography>
+              <Typography> {singleStudent?.phone}</Typography>
             </Grid>
           </Grid>
         </Grid>

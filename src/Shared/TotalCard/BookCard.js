@@ -50,7 +50,10 @@ const BookCard = ({ books }) => {
           <Grid container spacing={5}>
             <Grid item>
               <Typography>
-                7555 <br />
+                <span style={{ fontSize: "22px", fontWeight: "bold" }}>
+                  7555
+                </span>{" "}
+                <br />
                 {books}
               </Typography>
             </Grid>
