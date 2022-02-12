@@ -1,30 +1,40 @@
 const multer = require("multer");
 
-const router = require("express").Router();
+const uploadFile = () => {
+  const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+      cb(null, "static/images");
+    },
+    filename: function (req, file, cb) {
+      cb(null, file.originalname);
+    },
+  });
 
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, "images");
-  },
-  filename: function (req, file, cb) {
-    // const uniqueSuffix = Date.now() + "-" + Math.round(Math.random() * 1e9);
-    // const nameSplited = file.originalname.split(".");
-    // cb(null, uniqueSuffix + "." + nameSplited[nameSplited.length - 1]);
-    cb(null, file.originalname);
-  },
-});
+  const upload = multer({ storage: storage }).single("file");
+  return upload;
+};
 
-const upload = multer({ storage: storage });
+const fileUploader = (req, res) => {
+  let uploadedFile = uploadFile();
+  uploadedFile(req, res, function (err) {
+    if (err) {
+      return res.status(400).json({ error_code: 1, err_desc: err });
+    }
 
-router.post("/file-uploader", upload.single("file"), function (req, res) {
-  if (req.file) {
     let url =
-      req.protocol + "://" + req.get("host") + "/images/" + req.file.filename;
+      req.protocol +
+      "://" +
+      req.get("host") +
+      "/static/images/" +
+      req.file.filename;
+
     return res.json({
-      message: "File Uplaod",
+      message: "File uploaded successfully",
       data: url,
     });
-  }
-});
+  });
+};
 
-module.exports = router;
+module.exports = {
+  fileUploader,
+};

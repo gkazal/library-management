@@ -18,7 +18,7 @@ app.use(morgan("dev"));
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use("/images", express.static("images"));
+app.use("/static", express.static("static"));
 
 // App Routes
 app.use("/system", systemRoutes);
