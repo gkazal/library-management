@@ -42,6 +42,9 @@ const getAllStudents = async (req, res) => {
       where: {
         role: "student",
       },
+      // ekane student kon department and batch ar seta relation korar jonno..
+      // relation a data show koranor dorkar hole..include use korbo..
+      // student ar modde department and batch show korano hobe..
       include: [
         { model: Department, attributes: ["name"] },
         { model: Batch, attributes: ["name"] },
@@ -169,6 +172,7 @@ const getStudent = async (req, res) => {
         // student access id dia single student show hobe...
         student_access_id: req.params.studentAccessId,
       },
+      // ekane student kon department and batch ar seta relation korar jonno..
       include: [
         { model: Department, attributes: ["name"] },
         { model: Batch, attributes: ["name"] },
@@ -188,7 +192,7 @@ const getStudent = async (req, res) => {
   }
 };
 
-// ekane student ar info gula sob updata kora jabe...
+//  student info update  ...
 const studentStatusChange = async (req, res) => {
   try {
     const student = await User.findOne({
@@ -199,8 +203,9 @@ const studentStatusChange = async (req, res) => {
     });
 
     if (student) {
+      // j item gula change hobe seigla ekne boshbe..
+      //update korar somoi text khali thakleo problem hobe na..
       let status = req.body.status || student.status;
-      // let email = req.body.email || student.email;
       let phone = req.body.phone || student.phone;
       let password = req.body.password || student.password;
 
@@ -227,18 +232,20 @@ const studentStatusChange = async (req, res) => {
 
 const destroyStudent = async (req, res) => {
   try {
+    // student ace kina id dia check korlam..
     const student = await User.findOne({
       where: {
-        // sudent access id dia id delete hobe..
         student_access_id: req.params.studentAccessId,
       },
     });
 
     if (student) {
+      // ekane student delete korar age status active ace kina check korbo..
       let status = req.body.status;
 
-      student.destroy(
-        { status },
+      // jodi status pai then sudent access id dia id delete hobe..
+      await student.destroy(
+        // { status },
         {
           where: {
             student_access_id: req.params.studentAccessId,

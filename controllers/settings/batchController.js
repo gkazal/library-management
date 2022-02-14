@@ -6,8 +6,10 @@ const Department = require("../../models/Department");
 const index = async (req, res) => {
   try {
     const Batches = await Batch.findAll({
+      // kon kon field gula amra dekhabo seita attribute ar modde jabe..
       attributes: ["id", "name"],
       // fetch Department Relation Data
+      // relatin a data show koranor dorkar hole..include use korbo..
       include: [{ model: Department, attributes: ["name"] }],
     });
 

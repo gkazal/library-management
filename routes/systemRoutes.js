@@ -2,15 +2,20 @@ const { sequelize } = require("../config/db");
 const Batch = require("../models/Batch");
 const Department = require("../models/Department");
 const User = require("../models/User");
+const Book = require("../models/Book");
+const Author = require("../models/Author");
 
 const router = require("express").Router();
 
 // for create table only...
+// all table data all drop hoye jabe...
+
 router.get("/db-migrate", async (req, res) => {
-  // user bathc and department table data all drop hoye jabe...
-  await User.drop();
-  await Batch.drop();
-  await Department.drop();
+  // await User.drop();
+  // await Batch.drop();
+  // await Department.drop();
+  await Book.drop();
+  await Author.drop();
   sequelize.sync();
 
   console.log("Table migrate to database");

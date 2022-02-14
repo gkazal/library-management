@@ -6,6 +6,7 @@ const Department = require("../../models/Department");
 const index = async (req, res) => {
   try {
     const departments = await Department.findAll({
+      // ekane department table a id,name and batch show korbe..
       attributes: ["id", "name"],
       include: [{ model: Batch, attributes: ["name"] }],
     });
@@ -19,7 +20,7 @@ const index = async (req, res) => {
   }
 };
 
-// create department from frontend...
+// create department...
 const store = async (req, res) => {
   try {
     const department = await Department.create({
@@ -72,7 +73,7 @@ const update = async (req, res) => {
     if (department) {
       let name = req.body.name || department.name;
 
-      department.update(
+      await department.update(
         {
           name,
         },

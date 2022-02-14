@@ -5,6 +5,7 @@ const { sequelize } = require("../config/db");
 const Book = sequelize.define("books", {
   accession_no: {
     type: DataTypes.STRING,
+    unique: true,
   },
   cl_accession_no: {
     type: DataTypes.STRING,
@@ -12,8 +13,8 @@ const Book = sequelize.define("books", {
   isbn_no: {
     type: DataTypes.STRING,
   },
-  author: {
-    type: DataTypes.STRING,
+  author_id: {
+    type: DataTypes.INTEGER,
   },
   name: {
     type: DataTypes.STRING,
