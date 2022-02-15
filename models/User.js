@@ -1,5 +1,6 @@
 const { DataTypes } = require("sequelize");
 const { sequelize } = require("../config/db");
+const Borrower = require("./Borrower");
 
 // create student name in table..
 const User = sequelize.define("users", {
@@ -36,5 +37,8 @@ const User = sequelize.define("users", {
     type: DataTypes.STRING,
   },
 });
+
+User.hasMany(Borrower, { foreignKey: "student_id" });
+Borrower.belongsTo(User, { foreignKey: "student_id", as: "student" });
 
 module.exports = User;

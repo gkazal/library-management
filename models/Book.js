@@ -1,5 +1,6 @@
 const { DataTypes } = require("sequelize");
 const { sequelize } = require("../config/db");
+const Borrower = require("./Borrower");
 
 // create book name in table..
 const Book = sequelize.define("books", {
@@ -32,5 +33,8 @@ const Book = sequelize.define("books", {
     type: DataTypes.INTEGER,
   },
 });
+
+Book.hasMany(Borrower, { foreignKey: "book_id" });
+Borrower.belongsTo(Book, { foreignKey: "book_id" });
 
 module.exports = Book;

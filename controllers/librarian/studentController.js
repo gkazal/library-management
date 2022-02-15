@@ -1,7 +1,10 @@
 const { serverError, itemNotFound } = require("../../helpers/helpers");
 const Batch = require("../../models/Batch");
+const Borrower = require("../../models/Borrower");
 const Department = require("../../models/Department");
 const User = require("../../models/User");
+const Book = require("../../models/Book");
+const Author = require("../../models/Author");
 
 const studentSummary = async (req, res) => {
   try {
@@ -48,6 +51,7 @@ const getAllStudents = async (req, res) => {
       include: [
         { model: Department, attributes: ["name"] },
         { model: Batch, attributes: ["name"] },
+        { model: Borrower, attributes: ["borrower_id"] },
       ],
     });
 
@@ -147,7 +151,7 @@ const store = async (req, res) => {
       password: req.body.password,
       avatar: req.body.avatar,
       role: req.body.role || "student",
-      status: "active",
+      status: "inctive",
     });
 
     if (student) {
@@ -172,10 +176,20 @@ const getStudent = async (req, res) => {
         // student access id dia single student show hobe...
         student_access_id: req.params.studentAccessId,
       },
-      // ekane student kon department and batch ar seta relation korar jonno..
+      // ekane student kon department and batch and book borrowe ace kina seta table a show korbe..
       include: [
         { model: Department, attributes: ["name"] },
         { model: Batch, attributes: ["name"] },
+        {
+          // student detials a borrow history te borrow info and book info and book info ar modde author name dekhano lagbe..
+          model: Borrower,
+          include: {
+            model: Book,
+            include: {
+              model: Author,
+            },
+          },
+        },
       ],
     });
 

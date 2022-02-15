@@ -12,6 +12,8 @@ const systemRoutes = require("./routes/systemRoutes");
 const studentRoutes = require("./routes/librarian/studentRoutes");
 const bookRoutes = require("./routes/librarian/bookRoutes");
 const authorRoutes = require("./routes/librarian/authorRoutes");
+const borrowerRoutes = require("./routes/librarian/borrowerRoutes");
+
 const siteRoutes = require("./routes/siteRoutes");
 
 // Assign Express App
@@ -29,6 +31,7 @@ app.use("/settings/batches", batchRoutes);
 app.use("/librarian/students", studentRoutes);
 app.use("/librarian/authors", authorRoutes);
 app.use("/librarian/books", bookRoutes);
+app.use("/librarian/books", borrowerRoutes);
 
 app.use("/site", siteRoutes);
 
