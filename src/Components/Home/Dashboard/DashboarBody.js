@@ -11,6 +11,8 @@ import { fetchStudentsSummery } from "../../../store/actions/studentsSummeryActi
 import { fetchAllStudents } from "../../../store/actions/allStudentsAction";
 import { fetchInactiveStudents } from "../../../store/actions/inactiveStudentsAction";
 import { fetchAllDepartments } from "../../../store/actions/allDepartmentsAction";
+import { fetchBooksAvailable } from "../../../store/actions/booksAvailableAction";
+import { fetchBooksBorrowed } from "../../../store/actions/booksBorrowedAction";
 
 const useStyles = makeStyles({
   root: {
@@ -80,10 +82,17 @@ const DashboarBody = () => {
     dispatch(fetchAllDepartments());
   }, [dispatch]);
 
+  useEffect(() => {
+    dispatch(fetchBooksAvailable());
+  }, [dispatch]);
+
+  useEffect(() => {
+    dispatch(fetchBooksBorrowed());
+  }, [dispatch]);
+
   const studentsSummery = useSelector(
     (state) => state.studentsSummery.studentsSummery
   );
-  console.log(studentsSummery.length);
 
   const allStudents = useSelector((state) => state.allStudents.allStudents);
   const studentCount = allStudents.length;
@@ -92,6 +101,16 @@ const DashboarBody = () => {
     (state) => state.inactiveStudents.inactiveStudents
   );
   const inactiveStudentsCount = inactiveStudents.length;
+
+  const booksAvailable = useSelector(
+    (state) => state.booksAvailable.booksAvailable
+  );
+  const booksAvailableCount = booksAvailable.length;
+
+  const booksBorrowed = useSelector(
+    (state) => state.booksBorrowed.booksBorrowed
+  );
+  const booksBorrowCount = booksBorrowed.length;
 
   return (
     <>
@@ -123,10 +142,13 @@ const DashboarBody = () => {
                 <StudentCard count={studentCount} students={"Total Students"} />
               </Grid>
               <Grid item lg={3}>
-                <BookCard books={"Books Available"} />
+                <BookCard
+                  count={booksAvailableCount}
+                  books={"Books Available"}
+                />
               </Grid>
               <Grid item lg={3}>
-                <BookCard books={"Books Borrowed"} />
+                <BookCard count={booksBorrowCount} books={"Books Borrowed"} />
               </Grid>
               <Grid item lg={3}>
                 <BookCard books={"Overdue Books"} />

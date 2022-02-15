@@ -2,7 +2,6 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import "./App.css";
 import Login from "./Components/Auth/Login/Login";
 import BookRequest from "./Components/Home/BookRequest/BookRequest";
-import Dashboard from "./Components/Home/Dashboard/Dashboard";
 import DashboardTab from "./Components/Home/Dashboard/DashboardTab";
 import ManageBook from "./Components/Home/ManageBook/ManageBook";
 import BorrowDetails from "./Components/Home/ManageBorrower/BorrowDetails";

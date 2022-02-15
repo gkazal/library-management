@@ -18,6 +18,7 @@ import SearchIcon from "@mui/icons-material/Search";
 import { Icon } from "@iconify/react";
 import ManageBorrowerTable from "./ManageBorrowerTable";
 import AddBorrower from "./AddBorrower";
+import { useSelector } from "react-redux";
 
 const useStyles = makeStyles({
   textField: {
@@ -67,19 +68,24 @@ const ManageBorrower = () => {
     setOpen(false);
   };
 
+  const booksBorrowed = useSelector(
+    (state) => state.booksBorrowed.booksBorrowed
+  );
+  const booksBorrowCount = booksBorrowed.length;
+
   return (
     <>
-      <Navbar />
-      <DashboardTab />
+      {/* <Navbar />
+      <DashboardTab /> */}
       <Grid container justifyContent="center">
         <Grid item xl={8} lg={10} md={8} sm={11} xs={12}>
           <Box mt={10}>
             <Grid container justifyContent="center" spacing={5}>
               <Grid item lg={3}>
-                <BookCard />
+                <BookCard count={booksBorrowCount} books={"Book Borrowed"} />
               </Grid>
               <Grid item lg={3}>
-                <BookCard />
+                <BookCard books={"Overdue Books"} />
               </Grid>
             </Grid>
           </Box>

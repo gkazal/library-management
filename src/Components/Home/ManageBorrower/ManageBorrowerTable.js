@@ -9,6 +9,8 @@ import Paper from "@mui/material/Paper";
 import { Box, styled } from "@mui/material";
 import { useHistory } from "react-router-dom";
 import { tableCellClasses } from "@mui/material";
+import { useSelector } from "react-redux";
+import { ActionButton } from "../../../Styles/globalStyled";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -42,47 +44,57 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   },
 }));
 
-function createData(name, calories, fat, carbs, protein) {
-  return { name, calories, fat, carbs, protein };
-}
-
-const rows = [
-  createData("Frozen yoghurt", 159, 6.0, 24, 4.0),
-  createData("Ice cream sandwich", 237, 9.0, 37, 4.3),
-  createData("Eclair", 262, 16.0, 24, 6.0),
-  createData("Cupcake", 305, 3.7, 67, 4.3),
-  createData("Gingerbread", 356, 16.0, 49, 3.9),
-];
-
 const ManageBorrowerTable = () => {
-  const history = useHistory();
-  const handleOpenService = () => {
-    history.push("/admin/inbox/details");
-  };
+  const booksBorrowed = useSelector(
+    (state) => state.booksBorrowed.booksBorrowed
+  );
+  console.log(booksBorrowed);
+
   return (
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 700 }} aria-label="customized table">
         <TableHead>
           <TableRow>
-            <StyledTableCell>Dessert (100g serving)</StyledTableCell>
-            <StyledTableCell align="right">Calories</StyledTableCell>
-            <StyledTableCell align="right">Fat&nbsp;(g)</StyledTableCell>
-            <StyledTableCell align="right">Carbs&nbsp;(g)</StyledTableCell>
-            <StyledTableCell align="right">Protein&nbsp;(g)</StyledTableCell>
+            <StyledTableCell>Student ID</StyledTableCell>
+            <StyledTableCell align="right">Student Name</StyledTableCell>
+            <StyledTableCell align="right">Department</StyledTableCell>
+            <StyledTableCell align="right">Contact</StyledTableCell>
+            <StyledTableCell align="right">Email</StyledTableCell>
+            <StyledTableCell align="right">Action</StyledTableCell>
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row) => (
-            <StyledTableRow key={row.name}>
-              <StyledTableCell component="th" scope="row">
-                {row.name}
-              </StyledTableCell>
-              <StyledTableCell align="right">{row.calories}</StyledTableCell>
-              <StyledTableCell align="right">{row.fat}</StyledTableCell>
-              <StyledTableCell align="right">{row.carbs}</StyledTableCell>
-              <StyledTableCell align="right">{row.protein}</StyledTableCell>
-            </StyledTableRow>
-          ))}
+          {booksBorrowed &&
+            booksBorrowed?.map((row, i) => (
+              <StyledTableRow key={i}>
+                <StyledTableCell component="th" scope="row">
+                  {row?.student_id}
+                </StyledTableCell>
+                <StyledTableCell align="right">
+                  {row?.student?.name}
+                </StyledTableCell>
+                <StyledTableCell align="right">
+                  {row?.student?.department?.name}
+                </StyledTableCell>
+                <StyledTableCell align="right">
+                  {row?.student?.phone}
+                </StyledTableCell>
+                <StyledTableCell align="right">
+                  {row?.student?.email}
+                </StyledTableCell>
+                <StyledTableCell align="right">
+                  <Box>
+                    <ActionButton
+                    // onClick={() =>
+                    //   handleStudentDetails(row.student_access_id)
+                    // }
+                    >
+                      VIEW DETAILS
+                    </ActionButton>
+                  </Box>
+                </StyledTableCell>
+              </StyledTableRow>
+            ))}
         </TableBody>
       </Table>
     </TableContainer>

@@ -2,6 +2,7 @@ import { Grid, Typography } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { Box } from "@mui/system";
 import React, { useState } from "react";
+import ManageBorrower from "../ManageBorrower/ManageBorrower";
 import MangeStudent from "../ManageStudent/MangeStudent";
 import Navbar from "../Navbar/Navbar";
 import DashboarBody from "./DashboarBody";
@@ -144,6 +145,7 @@ const DashboardTab = () => {
       </Grid>
       {field === "dashboard" && <DashboarBody />}
       {field === "student" && <MangeStudent />}
+      {field === "borrower" && <ManageBorrower />}
     </Box>
   );
 };

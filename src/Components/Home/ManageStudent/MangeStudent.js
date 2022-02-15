@@ -92,7 +92,7 @@ const MangeStudent = () => {
                 />
               </Grid>
               <Grid item lg={3}>
-                <StudentCard students={"Inactive Students"} />
+                <StudentCard students={"Activation Request"} />
               </Grid>
             </Grid>
           </Box>

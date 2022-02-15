@@ -20,3 +20,11 @@ export const inactiveStudentsUrl = {
 export const allDepartmentsUrl = {
   allDepartments: ROOT_URL + "settings/departments",
 };
+
+export const booksAvailableUrl = {
+  booksAvailable: ROOT_URL + "librarian/books/get-books",
+};
+
+export const booksBorrowUrl = {
+  booksBorrow: ROOT_URL + "librarian/books/get-AllBorrowers",
+};
