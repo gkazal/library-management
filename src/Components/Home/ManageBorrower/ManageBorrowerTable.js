@@ -49,6 +49,12 @@ const ManageBorrowerTable = () => {
     (state) => state.booksBorrowed.booksBorrowed
   );
   console.log(booksBorrowed);
+  // const student_id = booksBorrowed.student.student_access_id;
+
+  const history = useHistory();
+  const handleViewDetails = (studentAccessId) => {
+    history.push("/borrowDetails/" + studentAccessId);
+  };
 
   return (
     <TableContainer component={Paper}>
@@ -56,11 +62,11 @@ const ManageBorrowerTable = () => {
         <TableHead>
           <TableRow>
             <StyledTableCell>Student ID</StyledTableCell>
-            <StyledTableCell align="right">Student Name</StyledTableCell>
-            <StyledTableCell align="right">Department</StyledTableCell>
-            <StyledTableCell align="right">Contact</StyledTableCell>
-            <StyledTableCell align="right">Email</StyledTableCell>
-            <StyledTableCell align="right">Action</StyledTableCell>
+            <StyledTableCell align="left">Student Name</StyledTableCell>
+            <StyledTableCell align="left">Department</StyledTableCell>
+            <StyledTableCell align="left">Contact</StyledTableCell>
+            <StyledTableCell align="left">Email</StyledTableCell>
+            <StyledTableCell align="left">Action</StyledTableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -70,24 +76,24 @@ const ManageBorrowerTable = () => {
                 <StyledTableCell component="th" scope="row">
                   {row?.student_id}
                 </StyledTableCell>
-                <StyledTableCell align="right">
+                <StyledTableCell align="left">
                   {row?.student?.name}
                 </StyledTableCell>
-                <StyledTableCell align="right">
+                <StyledTableCell align="left">
                   {row?.student?.department?.name}
                 </StyledTableCell>
-                <StyledTableCell align="right">
+                <StyledTableCell align="left">
                   {row?.student?.phone}
                 </StyledTableCell>
-                <StyledTableCell align="right">
+                <StyledTableCell align="left">
                   {row?.student?.email}
                 </StyledTableCell>
-                <StyledTableCell align="right">
+                <StyledTableCell align="left">
                   <Box>
                     <ActionButton
-                    // onClick={() =>
-                    //   handleStudentDetails(row.student_access_id)
-                    // }
+                      onClick={() =>
+                        handleViewDetails(row.student.student_access_id)
+                      }
                     >
                       VIEW DETAILS
                     </ActionButton>

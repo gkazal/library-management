@@ -1,20 +1,20 @@
 import * as types from "../types";
-import { allDepartmentsUrl } from "../../constants/apiUrl";
+import { batchesUrl } from "../../constants/apiUrl";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 toast.configure();
 
-export const fetchAllDepartments =
+export const fetchAllBatches =
   (pageNum = 1, cb = () => {}) =>
   (dispatch) => {
-    fetch(allDepartmentsUrl.allDepartments + "?page=" + pageNum, {
+    fetch(batchesUrl.allBatches + "?page=" + pageNum, {
       method: "GET",
     })
       .then((res) => res.json())
       .then((res) => {
         if (res.status === "success") {
           dispatch({
-            type: types.FETCH_ALL_DEPARTMENTS,
+            type: types.FETCH_ALL_BATCHES,
             payload: res.data,
           });
           cb();
@@ -23,10 +23,10 @@ export const fetchAllDepartments =
       .catch((err) => console.log(err));
   };
 
-export const addDepartment =
+export const addBatch =
   (data, cb = () => {}) =>
   (dispatch) => {
-    fetch(allDepartmentsUrl.allDepartments, {
+    fetch(batchesUrl.allBatches, {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -41,7 +41,7 @@ export const addDepartment =
           toast.success(res.message);
 
           dispatch({
-            type: types.ADD_DEPARTMENT,
+            type: types.ADD_BATCH,
             payload: res.data,
           });
 
@@ -54,7 +54,7 @@ export const addDepartment =
 export const fetchDepartment =
   (id, cb = () => {}) =>
   (dispatch) => {
-    fetch(allDepartmentsUrl.singleDepartment.replace(":id", id), {
+    fetch(batchesUrl.singleBatch.replace(":id", id), {
       method: "GET",
       headers: {
         Accept: "application/json",
@@ -64,7 +64,7 @@ export const fetchDepartment =
       .then((res) => {
         if (res.status === "success") {
           dispatch({
-            type: types.FETCH_DEPARTMENT,
+            type: types.FETCH_BATCH,
             payload: res.data,
           });
           cb();

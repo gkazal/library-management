@@ -21,6 +21,7 @@ import React, { useState } from "react";
 import logo from "../../../images/nav-logo.png";
 import { NavBookRequestButton } from "../../../Styles/globalStyled";
 import MenuIcon from "@mui/icons-material/Menu";
+import { useHistory } from "react-router-dom";
 
 const useStyles = makeStyles({
   root: {
@@ -117,6 +118,11 @@ const useStyles = makeStyles({
       backgroundColor: "#000",
     },
   },
+
+  department: {
+    cursor: "pointer",
+    color: "white",
+  },
 });
 const Navbar = () => {
   const classes = useStyles();
@@ -134,19 +140,31 @@ const Navbar = () => {
     setOpenDrawer(state);
   };
 
+  const history = useHistory();
+  const handleDepartment = () => {
+    history.push("/department");
+  };
+
   return (
     <Grid container className={classes.root}>
       <Grid item xl={10} lg={11} md={11} sm={11} xs={12}>
         <Grid container className={classes.root1}>
-          <Grid item xl={6} lg={4} md={4}>
+          <Grid item xl={5} lg={4} md={4}>
             <Box mt={1}>
               <img src={logo} alt="" />
             </Box>
           </Grid>
-          <Grid item xl={6} lg={8} md={8}>
+          <Grid item xl={7} lg={8} md={8}>
             <Hidden mdDown>
               <Box textAlign="right" className={classes.navbody}>
                 <NavBookRequestButton>Book Requested</NavBookRequestButton>
+                <Typography
+                  className={classes.department}
+                  onClick={handleDepartment}
+                >
+                  Department
+                </Typography>
+
                 <Typography sx={{ color: "white" }}>Generate Report</Typography>
                 <FormControl variant="standard">
                   <Input
@@ -200,6 +218,8 @@ const Navbar = () => {
           >
             <Box textAlign="right" className={classes.navbody}>
               <NavBookRequestButton>Book Requested</NavBookRequestButton>
+              <Typography sx={{ color: "white" }}>Department</Typography>
+
               <Typography sx={{ color: "white" }}>Generate Report</Typography>
               <FormControl variant="standard">
                 <Input

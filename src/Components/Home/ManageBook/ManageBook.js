@@ -9,7 +9,7 @@ import {
 } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { Box } from "@mui/system";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import BookCard from "../../../Shared/TotalCard/BookCard";
 import { AddButton, BookRequestText } from "../../../Styles/globalStyled";
 import DashboardTab from "../Dashboard/DashboardTab";
@@ -18,6 +18,7 @@ import ManageBookTable from "./ManageBookTable";
 import { Icon } from "@iconify/react";
 import SearchIcon from "@mui/icons-material/Search";
 import AddBook from "./AddBook";
+import { useDispatch, useSelector } from "react-redux";
 
 const useStyles = makeStyles({
   textField: {
@@ -58,6 +59,11 @@ const useStyles = makeStyles({
 const ManageBook = () => {
   const classes = useStyles();
 
+  // const dispatch = useDispatch();
+  // useEffect(() => {
+  //   dispatch(fetchAllDepartments());
+  // }, [dispatch]);
+
   const [open, setOpen] = useState(false);
 
   const handleClickOpen = () => {
@@ -68,20 +74,25 @@ const ManageBook = () => {
     setOpen(false);
   };
 
+  const totalBooks = useSelector(
+    (state) => state.booksAvailable.booksAvailable
+  );
+  console.log(totalBooks);
+
   return (
     <>
-      <Navbar />
-      <DashboardTab />
+      {/* <Navbar /> */}
+      {/* <DashboardTab /> */}
 
       <Grid container justifyContent="center">
         <Grid item xl={8} lg={10} md={8} sm={11} xs={12}>
           <Box mt={10}>
             <Grid container justifyContent="center" spacing={5}>
               <Grid item lg={3}>
-                <BookCard />
+                <BookCard count={totalBooks.length} books={"Total Books"} />
               </Grid>
               <Grid item lg={3}>
-                <BookCard />
+                <BookCard books={"Total Author"} />
               </Grid>
             </Grid>
           </Box>
@@ -96,6 +107,7 @@ const ManageBook = () => {
                 lg={6}
                 display="flex"
                 alignItems="center"
+                justifyContent="end"
                 className={classes.rightGrid}
               >
                 <FormControl variant="standard">

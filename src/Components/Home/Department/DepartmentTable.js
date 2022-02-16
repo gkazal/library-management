@@ -6,7 +6,7 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import { Box, Pagination, styled } from "@mui/material";
+import { Box, Dialog, DialogContent, Pagination, styled } from "@mui/material";
 import { tableCellClasses } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { ActionButton } from "../../../Styles/globalStyled";
@@ -15,6 +15,8 @@ import {
   fetchSingleStudent,
 } from "../../../store/actions/allStudentsAction";
 import { useHistory } from "react-router-dom";
+import AddDepartment from "./AddDepartment";
+import AddBatch from "./AddBatch";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -48,10 +50,11 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   },
 }));
 
-const ManageStudentTable = () => {
-  const allStudents = useSelector((state) => state.allStudents.allStudents);
-  // console.log(allStudents[0].phone);
-  console.log(allStudents);
+const DepartmentTable = () => {
+  const departments = useSelector(
+    (state) => state.allDepartments.allDepartments
+  );
+  console.log(departments);
 
   const [page, setPage] = React.useState(1);
 
@@ -62,9 +65,14 @@ const ManageStudentTable = () => {
     dispatch(fetchAllStudents(newPage));
   };
 
-  const history = useHistory();
-  const handleStudentDetails = (studentAccessId) => {
-    history.push("/studentDetails/" + studentAccessId);
+  const [open, setOpen] = useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
   };
 
   return (
@@ -72,47 +80,48 @@ const ManageStudentTable = () => {
       <Table sx={{ minWidth: 700 }} aria-label="customized table">
         <TableHead>
           <TableRow>
-            <StyledTableCell>STUDENT ID</StyledTableCell>
-            <StyledTableCell align="left">STUDENT NAME</StyledTableCell>
-            <StyledTableCell align="left">DEPARTMENT</StyledTableCell>
-            <StyledTableCell align="left">BATCH</StyledTableCell>
-            <StyledTableCell align="left">CONTACT NO</StyledTableCell>
+            <StyledTableCell>SERIAL</StyledTableCell>
+            <StyledTableCell align="left">DEPARTMENT NAME</StyledTableCell>
+            <StyledTableCell align="left">LAST ADDED BATCH NO</StyledTableCell>
+            <StyledTableCell align="left">TOTAL STUDENT</StyledTableCell>
             <StyledTableCell align="left">ACTION</StyledTableCell>
           </TableRow>
         </TableHead>
         <TableBody>
-          {allStudents &&
-            allStudents.map((row, i) => (
-              <StyledTableRow key={i}>
-                <StyledTableCell component="th" scope="row">
-                  {row?.student_access_id}
-                </StyledTableCell>
-                <StyledTableCell align="left">{row?.name}</StyledTableCell>
-                <StyledTableCell align="left">
-                  {row?.department?.name}
-                </StyledTableCell>
-                <StyledTableCell align="left">
-                  {row?.batch?.name}
-                </StyledTableCell>
-                <StyledTableCell align="left">{row?.phone}</StyledTableCell>
-                <StyledTableCell align="left">
-                  <Box>
-                    <ActionButton
-                      onClick={() =>
-                        handleStudentDetails(row.student_access_id)
-                      }
-                    >
-                      VIEW DETAILS
-                    </ActionButton>
-                  </Box>
-                </StyledTableCell>
-              </StyledTableRow>
-            ))}
+          {departments?.map((row, i) => (
+            <StyledTableRow key={i}>
+              <StyledTableCell component="th" scope="row">
+                {row?.id}
+              </StyledTableCell>
+              <StyledTableCell align="left">{row?.name}</StyledTableCell>
+              <StyledTableCell align="left">
+                {row?.batches?.length}
+              </StyledTableCell>
+              <StyledTableCell align="left">
+                {" "}
+                {row?.users?.length}
+              </StyledTableCell>
+              <StyledTableCell align="left">
+                <Box>
+                  <ActionButton onClick={handleClickOpen}>
+                    ADD NEW BATCH
+                  </ActionButton>
+                </Box>
+              </StyledTableCell>
+            </StyledTableRow>
+          ))}
         </TableBody>
       </Table>
+
+      <Dialog maxWidth="sm" fullWidth open={open} onClose={handleClose}>
+        <DialogContent>
+          <AddBatch />
+        </DialogContent>
+      </Dialog>
+
       <Box p={1}>
         <Pagination
-          count={Math.ceil(allStudents?.total / allStudents?.per_page)}
+          count={Math.ceil(departments?.total / departments?.per_page)}
           variant="outlined"
           color="secondary"
           page={page}
@@ -123,4 +132,4 @@ const ManageStudentTable = () => {
   );
 };
 
-export default ManageStudentTable;
+export default DepartmentTable;

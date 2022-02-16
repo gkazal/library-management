@@ -19,10 +19,17 @@ export const inactiveStudentsUrl = {
 
 export const allDepartmentsUrl = {
   allDepartments: ROOT_URL + "settings/departments",
+  singleDepartment: ROOT_URL + "settings/departments/:id",
+};
+
+export const batchesUrl = {
+  allBatches: ROOT_URL + "settings/batches",
+  singleBatch: ROOT_URL + "settings/batches/:id",
 };
 
 export const booksAvailableUrl = {
   booksAvailable: ROOT_URL + "librarian/books/get-books",
+  singleBook: ROOT_URL + "librarian/books/get-single-book/:id",
 };
 
 export const booksBorrowUrl = {

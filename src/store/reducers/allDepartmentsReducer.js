@@ -2,6 +2,7 @@ import * as types from "../types";
 
 const initialStates = {
   allDepartments: [],
+  department: {},
 };
 
 const allDepartments = (state = initialStates, action) => {
@@ -10,6 +11,12 @@ const allDepartments = (state = initialStates, action) => {
       return {
         ...state,
         allDepartments: action.payload,
+      };
+
+    case types.FETCH_DEPARTMENT:
+      return {
+        ...state,
+        department: action.payload,
       };
 
     default:

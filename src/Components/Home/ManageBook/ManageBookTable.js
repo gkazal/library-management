@@ -9,6 +9,7 @@ import Paper from "@mui/material/Paper";
 import { Box, styled } from "@mui/material";
 import { useHistory } from "react-router-dom";
 import { tableCellClasses } from "@mui/material";
+import { useSelector } from "react-redux";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -42,45 +43,41 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   },
 }));
 
-function createData(name, calories, fat, carbs, protein) {
-  return { name, calories, fat, carbs, protein };
-}
-
-const rows = [
-  createData("Frozen yoghurt", 159, 6.0, 24, 4.0),
-  createData("Ice cream sandwich", 237, 9.0, 37, 4.3),
-  createData("Eclair", 262, 16.0, 24, 6.0),
-  createData("Cupcake", 305, 3.7, 67, 4.3),
-  createData("Gingerbread", 356, 16.0, 49, 3.9),
-];
-
 const ManageBookTable = () => {
-  const history = useHistory();
-  const handleOpenService = () => {
-    history.push("/admin/inbox/details");
-  };
+  const totalBooks = useSelector(
+    (state) => state.booksAvailable.booksAvailable
+  );
+
   return (
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 700 }} aria-label="customized table">
         <TableHead>
           <TableRow>
-            <StyledTableCell>Dessert (100g serving)</StyledTableCell>
-            <StyledTableCell align="right">Calories</StyledTableCell>
-            <StyledTableCell align="right">Fat&nbsp;(g)</StyledTableCell>
-            <StyledTableCell align="right">Carbs&nbsp;(g)</StyledTableCell>
-            <StyledTableCell align="right">Protein&nbsp;(g)</StyledTableCell>
+            <StyledTableCell>ACCESSION NO</StyledTableCell>
+            <StyledTableCell align="right">BOOK NAME</StyledTableCell>
+            <StyledTableCell align="right">ATUHOR</StyledTableCell>
+            <StyledTableCell align="right">EDITION</StyledTableCell>
+            <StyledTableCell align="right">BOOK SELF NO</StyledTableCell>
+            <StyledTableCell align="right">ROW</StyledTableCell>
+            <StyledTableCell align="right">COLUMN</StyledTableCell>
+            <StyledTableCell align="right">AVAILABILITY</StyledTableCell>
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row) => (
-            <StyledTableRow key={row.name}>
+          {totalBooks?.map((row, i) => (
+            <StyledTableRow key={i}>
               <StyledTableCell component="th" scope="row">
-                {row.name}
+                {row?.accession_no}
               </StyledTableCell>
-              <StyledTableCell align="right">{row.calories}</StyledTableCell>
-              <StyledTableCell align="right">{row.fat}</StyledTableCell>
-              <StyledTableCell align="right">{row.carbs}</StyledTableCell>
-              <StyledTableCell align="right">{row.protein}</StyledTableCell>
+              <StyledTableCell align="right">{row?.name}</StyledTableCell>
+              <StyledTableCell align="right">
+                {row?.author?.name}
+              </StyledTableCell>
+              <StyledTableCell align="right">{row?.edition}</StyledTableCell>
+              <StyledTableCell align="right">{row?.self_no}</StyledTableCell>
+              <StyledTableCell align="right">{row?.row_no}</StyledTableCell>
+              <StyledTableCell align="right">{row?.column_no}</StyledTableCell>
+              <StyledTableCell align="right">AVAILABLE</StyledTableCell>
             </StyledTableRow>
           ))}
         </TableBody>

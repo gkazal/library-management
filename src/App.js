@@ -3,6 +3,7 @@ import "./App.css";
 import Login from "./Components/Auth/Login/Login";
 import BookRequest from "./Components/Home/BookRequest/BookRequest";
 import DashboardTab from "./Components/Home/Dashboard/DashboardTab";
+import Department from "./Components/Home/Department/Department";
 import ManageBook from "./Components/Home/ManageBook/ManageBook";
 import BorrowDetails from "./Components/Home/ManageBorrower/BorrowDetails";
 import ManageBorrower from "./Components/Home/ManageBorrower/ManageBorrower";
@@ -26,10 +27,16 @@ function App() {
           component={StudentDetails}
         />
         <Route exact path="/manageBorrower" component={ManageBorrower} />
-        <Route exact path="/borrowDetails" component={BorrowDetails} />
+        <Route
+          exact
+          path="/borrowDetails/:studentAccessId"
+          component={BorrowDetails}
+        />
         <Route exact path="/manageBook" component={ManageBook} />
         <Route exact path="/student" component={StudentDashboard} />
         <Route exact path="/student/borrowHistory" component={BorrowHistory} />
+        <Route exact path="/department" component={Department} />
+
         <Route exact path="/student/profile" component={StudentProfile} />
       </Switch>
     </Router>
