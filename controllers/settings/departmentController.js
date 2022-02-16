@@ -1,14 +1,17 @@
+const { sequelize } = require("../../config/db");
 const { serverError, itemNotFound } = require("../../helpers/helpers");
 const Batch = require("../../models/Batch");
 const Department = require("../../models/Department");
+const User = require("../../models/User");
 
 // show department in frontend table..
 const index = async (req, res) => {
   try {
     const departments = await Department.findAll({
-      // ekane department table a id,name and batch show korbe..
-      attributes: ["id", "name"],
-      include: [{ model: Batch, attributes: ["name"] }],
+      include: [
+        { model: Batch, attributes: ["name"] },
+        { model: User, attributes: ["name"] },
+      ],
     });
 
     return res.status(200).json({

@@ -8,6 +8,12 @@ const Department = sequelize.define("departments", {
   name: {
     type: DataTypes.STRING,
   },
+  userCount: {
+    type: DataTypes.VIRTUAL,
+    async get() {
+      return await User.count({ where: { department_id: this.id } });
+    },
+  },
 });
 
 // Relation With Batch & Department
