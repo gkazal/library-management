@@ -2,6 +2,7 @@ import * as types from "../types";
 
 const initialStates = {
   booksBorrowed: [],
+  singleBorrower: {},
 };
 
 const booksBorrowed = (state = initialStates, action) => {
@@ -10,6 +11,12 @@ const booksBorrowed = (state = initialStates, action) => {
       return {
         ...state,
         booksBorrowed: action.payload,
+      };
+
+    case types.FETCH_SINGLE_BORROWER:
+      return {
+        ...state,
+        singleBorrower: action.payload,
       };
 
     default:

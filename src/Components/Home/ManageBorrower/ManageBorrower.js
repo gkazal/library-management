@@ -71,7 +71,7 @@ const ManageBorrower = () => {
   const booksBorrowed = useSelector(
     (state) => state.booksBorrowed.booksBorrowed
   );
-  const booksBorrowCount = booksBorrowed.length;
+  const booksBorrowCount = booksBorrowed.totalItems;
 
   return (
     <>
@@ -136,7 +136,7 @@ const ManageBorrower = () => {
                   onClose={handleClose}
                 >
                   <DialogContent>
-                    <AddBorrower />
+                    <AddBorrower close={handleClose} />
                   </DialogContent>
                 </Dialog>
               </Grid>

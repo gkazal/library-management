@@ -19,11 +19,26 @@ export const fetchBooksAvailable = () => (dispatch) => {
     })
     .catch((err) => console.log(err));
 };
+export const fetchAllBooksOnlyName = () => (dispatch) => {
+  fetch(booksAvailableUrl.allBooks, {
+    method: "GET",
+  })
+    .then((res) => res.json())
+    .then((res) => {
+      if (res.status === "success") {
+        dispatch({
+          type: types.FETCH_ALL_BOOKS_ONLY_NAMES,
+          payload: res.data,
+        });
+      }
+    })
+    .catch((err) => console.log(err));
+};
 
 export const addBook =
   (data, cb = () => {}) =>
   (dispatch) => {
-    fetch(booksAvailableUrl.booksAvailable, {
+    fetch(booksAvailableUrl.addBook, {
       method: "POST",
       headers: {
         Accept: "application/json",

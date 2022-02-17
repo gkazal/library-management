@@ -54,13 +54,13 @@ const ManageBookTable = () => {
         <TableHead>
           <TableRow>
             <StyledTableCell>ACCESSION NO</StyledTableCell>
-            <StyledTableCell align="right">BOOK NAME</StyledTableCell>
-            <StyledTableCell align="right">ATUHOR</StyledTableCell>
-            <StyledTableCell align="right">EDITION</StyledTableCell>
-            <StyledTableCell align="right">BOOK SELF NO</StyledTableCell>
-            <StyledTableCell align="right">ROW</StyledTableCell>
-            <StyledTableCell align="right">COLUMN</StyledTableCell>
-            <StyledTableCell align="right">AVAILABILITY</StyledTableCell>
+            <StyledTableCell align="left">BOOK NAME</StyledTableCell>
+            <StyledTableCell align="left">ATUHOR</StyledTableCell>
+            <StyledTableCell align="left">EDITION</StyledTableCell>
+            <StyledTableCell align="left">BOOK SELF NO</StyledTableCell>
+            <StyledTableCell align="left">ROW</StyledTableCell>
+            <StyledTableCell align="left">COLUMN</StyledTableCell>
+            <StyledTableCell align="left">AVAILABILITY</StyledTableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -69,15 +69,13 @@ const ManageBookTable = () => {
               <StyledTableCell component="th" scope="row">
                 {row?.accession_no}
               </StyledTableCell>
-              <StyledTableCell align="right">{row?.name}</StyledTableCell>
-              <StyledTableCell align="right">
-                {row?.author?.name}
-              </StyledTableCell>
-              <StyledTableCell align="right">{row?.edition}</StyledTableCell>
-              <StyledTableCell align="right">{row?.self_no}</StyledTableCell>
-              <StyledTableCell align="right">{row?.row_no}</StyledTableCell>
-              <StyledTableCell align="right">{row?.column_no}</StyledTableCell>
-              <StyledTableCell align="right">AVAILABLE</StyledTableCell>
+              <StyledTableCell align="left">{row?.name}</StyledTableCell>
+              <StyledTableCell align="left">{row?.author_name}</StyledTableCell>
+              <StyledTableCell align="left">{row?.edition}</StyledTableCell>
+              <StyledTableCell align="left">{row?.self_no}</StyledTableCell>
+              <StyledTableCell align="left">{row?.row_no}</StyledTableCell>
+              <StyledTableCell align="left">{row?.column_no}</StyledTableCell>
+              <StyledTableCell align="left">AVAILABLE</StyledTableCell>
             </StyledTableRow>
           ))}
         </TableBody>

@@ -22,7 +22,7 @@ const AddBook = () => {
     accession_no: "",
     cl_accession_no: "",
     isbn_no: "",
-    author_id: "",
+    author_name: "",
     name: "",
     edition: "",
     self_no: "",
@@ -46,7 +46,7 @@ const AddBook = () => {
       accession_no: "",
       cl_accession_no: "",
       isbn_no: "",
-      author_id: "",
+      author_name: "",
       name: "",
       edition: "",
       self_no: "",
@@ -126,8 +126,10 @@ const AddBook = () => {
             <TextField
               variant="outlined"
               fullWidth
-              value={input.isbn_no}
-              onChange={(e) => fieldChangeHandler("isbn_no", e.target.value)}
+              value={input.author_name}
+              onChange={(e) =>
+                fieldChangeHandler("author_name", e.target.value)
+              }
             />
           </Grid>
         </Grid>
@@ -173,7 +175,7 @@ const AddBook = () => {
             />
           </Grid>
           <Grid item lg={6}>
-            <Typography mb={1} mt={2}>
+            <Typography mb={1} mt={1}>
               Row No
             </Typography>
             <TextField
@@ -199,7 +201,9 @@ const AddBook = () => {
         </Grid>
 
         <Box mt={3}>
-          <AddButton>Add Book</AddButton>
+          <AddButton onClick={handleSubmit} type="submit">
+            Add Book
+          </AddButton>
         </Box>
       </form>
     </>

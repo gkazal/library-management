@@ -21,8 +21,9 @@ const BorrowDetails = () => {
   }, [dispatch, studentAccessId]);
 
   const singleStudent = useSelector((state) => state.allStudents.students);
+
   console.log(singleStudent);
-  const count = singleStudent.borrowers.length;
+  const count = singleStudent?.borrowers?.length || 0;
   console.log(count);
 
   return (

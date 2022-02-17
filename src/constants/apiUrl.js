@@ -29,9 +29,13 @@ export const batchesUrl = {
 
 export const booksAvailableUrl = {
   booksAvailable: ROOT_URL + "librarian/books/get-books",
+  addBook: ROOT_URL + "librarian/books/add-book",
   singleBook: ROOT_URL + "librarian/books/get-single-book/:id",
+  allBooks: ROOT_URL + "librarian/books/get-books-only-names",
 };
 
 export const booksBorrowUrl = {
   booksBorrow: ROOT_URL + "librarian/books/get-AllBorrowers",
+  addBorrower: ROOT_URL + "librarian/books/add-borrower",
+  singleBorrower: ROOT_URL + "librarian/books/get-single-borrower/:id",
 };
