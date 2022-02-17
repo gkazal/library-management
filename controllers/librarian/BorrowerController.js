@@ -4,12 +4,13 @@ const Borrower = require("../../models/Borrower");
 const User = require("../../models/User");
 const Author = require("../../models/Author");
 const Department = require("../../models/Department");
+const { getPagination, getPaginatorData } = require("../../config/paginator");
 
 const store = async (req, res) => {
   try {
     const borrower = await Borrower.create({
       student_id: req.body.student_id,
-      borrower_id: req.body.borrower_id,
+      // borrower_id: req.body.borrower_id,
       book_id: req.body.book_id,
       borrower_date: req.body.borrower_date,
       back_date: req.body.back_date,
@@ -31,7 +32,12 @@ const store = async (req, res) => {
 
 const getAllBorrowers = async (req, res) => {
   try {
-    const borrower = await Borrower.findAll({
+    const { page, size } = req.query;
+    const { limit, offset } = getPagination(page, size);
+
+    const borrower = await Borrower.findAndCountAll({
+      limit,
+      offset,
       include: [
         {
           model: User,
@@ -46,7 +52,26 @@ const getAllBorrowers = async (req, res) => {
     });
     return res.status(200).json({
       status: "success",
-      data: borrower,
+      data: getPaginatorData(borrower, page, limit),
+    });
+  } catch (e) {
+    serverError(res, e);
+  }
+};
+
+const getAllBorrowerPaginate = async (req, res) => {
+  try {
+    const { page, size } = req.query;
+    const { limit, offset } = getPagination(page, size);
+
+    const borrower = await Borrower.findAndCountAll({
+      limit,
+      offset,
+    });
+
+    return res.json({
+      status: "success",
+      data: getPaginatorData(borrower, page, limit),
     });
   } catch (e) {
     serverError(res, e);
@@ -82,14 +107,14 @@ const update = async (req, res) => {
     });
 
     if (borrower) {
-      let borrower_id = req.body.borrower_id || borrower.borrower_id;
+      // let borrower_id = req.body.borrower_id || borrower.borrower_id;
       let book_id = req.body.book_id || borrower.book_id;
       let borrower_date = req.body.borrower_date || borrower.borrower_date;
       let back_date = req.body.back_date || borrower.back_date;
 
       await borrower.update(
         {
-          borrower_id,
+          // borrower_id,
           book_id,
           borrower_date,
           back_date,
@@ -149,4 +174,6 @@ module.exports = {
   getSingleBorrower,
   update,
   destroyBorrower,
+
+  getAllBorrowerPaginate,
 };

@@ -8,7 +8,7 @@ const store = async (req, res) => {
       accession_no: req.body.accession_no,
       cl_accession_no: req.body.cl_accession_no,
       isbn_no: req.body.isbn_no,
-      author_id: req.body.author_id,
+      author_name: req.body.author_name,
       name: req.body.name,
       edition: req.body.edition,
       self_no: req.body.self_no,
@@ -35,7 +35,21 @@ const getAllBooks = async (req, res) => {
   try {
     const books = await Book.findAll({
       // book ar modde all book info and author ar name show hobe..
-      include: [{ model: Author, attributes: ["name"] }],
+      // include: [{ model: Author, attributes: ["name"] }],
+    });
+    return res.status(200).json({
+      status: "success",
+      data: books,
+    });
+  } catch (e) {
+    serverError(res, e);
+  }
+};
+
+const getAllBooksOnlyNames = async (req, res) => {
+  try {
+    const books = await Book.findAll({
+      attributes: ["id", "name"],
     });
     return res.status(200).json({
       status: "success",
@@ -131,4 +145,5 @@ module.exports = {
   getSingleBook,
   destroyBook,
   bookStatusChange,
+  getAllBooksOnlyNames,
 };

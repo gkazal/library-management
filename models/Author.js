@@ -8,7 +8,7 @@ const Author = sequelize.define("authors", {
   },
 });
 
-Author.hasMany(Book, { foreignKey: "author_id" });
-Book.belongsTo(Author, { foreignKey: "author_id" });
+// Author.hasMany(Book, { foreignKey: "author_name" });
+// Book.belongsTo(Author, { foreignKey: "author_name" });
 
 module.exports = Author;

@@ -15,9 +15,9 @@ router.get("/db-migrate", async (req, res) => {
   // await User.drop();
   // await Batch.drop();
   // await Department.drop();
-  // await Book.drop();
-  // await Author.drop();
   await Borrower.drop();
+  await Book.drop();
+  await Author.drop();
 
   sequelize.sync();
 

@@ -14,8 +14,8 @@ const Book = sequelize.define("books", {
   isbn_no: {
     type: DataTypes.STRING,
   },
-  author_id: {
-    type: DataTypes.INTEGER,
+  author_name: {
+    type: DataTypes.STRING,
   },
   name: {
     type: DataTypes.STRING,
