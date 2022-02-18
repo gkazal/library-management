@@ -51,7 +51,7 @@ const getAllStudents = async (req, res) => {
       include: [
         { model: Department, attributes: ["name"] },
         { model: Batch, attributes: ["name"] },
-        { model: Borrower, attributes: ["borrower_id"] },
+        { model: Borrower, attributes: [] },
       ],
     });
 

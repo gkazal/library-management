@@ -144,14 +144,15 @@ const update = async (req, res) => {
 const destroyBorrower = async (req, res) => {
   try {
     const borrower = await Borrower.findOne({
+      // delete ar somoi sudhu id dia delete korbo...
       where: {
-        student_id: req.params.student_id,
+        id: req.params.student_id,
       },
     });
     if (borrower) {
       await borrower.destroy({
         where: {
-          student_id: req.params.student_id,
+          id: req.params.student_id,
         },
       });
 

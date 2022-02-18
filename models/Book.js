@@ -32,6 +32,20 @@ const Book = sequelize.define("books", {
   column_no: {
     type: DataTypes.INTEGER,
   },
+  total_book: {
+    type: DataTypes.INTEGER,
+  },
+
+  availability: {
+    type: DataTypes.VIRTUAL,
+    // get() {
+    //   let totalBorrowCount = this.Borrower.count();
+
+    //   return this.total_book - totalBorrowCount >= 1
+    //     ? "Available"
+    //     : "Not Available";
+    // },
+  },
 });
 
 Book.hasMany(Borrower, { foreignKey: "book_id" });

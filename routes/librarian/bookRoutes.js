@@ -5,10 +5,12 @@ const {
   destroyBook,
   bookStatusChange,
   getAllBooksOnlyNames,
+  booksSummary,
 } = require("../../controllers/librarian/bookController");
 
 const router = require("express").Router();
 
+router.get("/get-books-summary", booksSummary);
 router.post("/add-book", store);
 router.get("/get-books", getAllBooks);
 router.get("/get-books-only-names", getAllBooksOnlyNames);

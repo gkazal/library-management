@@ -2,6 +2,39 @@ const { serverError, itemNotFound } = require("../../helpers/helpers");
 const Author = require("../../models/Author");
 const Book = require("../../models/Book");
 
+const booksSummary = async (req, res) => {
+  try {
+    const books = await Book.findAll({
+      attributes: ["author_name"],
+    });
+
+    const totalBookCount = books.length || 0;
+    let authorCount = 0;
+
+    if (books.length > 0) {
+      let authors = [];
+      books.forEach((item) => {
+        if (!authors.includes(item.author_name)) {
+          authors.push(item.author_name);
+          authorCount += 1;
+        }
+      });
+    }
+
+    return res.status(200).json({
+      status: "success",
+
+      data: [
+        { title: "Total Books", count: totalBookCount },
+
+        { title: "Total Author", count: authorCount },
+      ],
+    });
+  } catch (e) {
+    serverError(res, e);
+  }
+};
+
 const store = async (req, res) => {
   try {
     const book = await Book.create({
@@ -13,6 +46,7 @@ const store = async (req, res) => {
       edition: req.body.edition,
       self_no: req.body.self_no,
       row_no: req.body.row_no,
+      total_book: req.body.total_book,
       column_no: req.body.column_no,
     });
 
@@ -140,6 +174,7 @@ const destroyBook = async (req, res) => {
 };
 
 module.exports = {
+  booksSummary,
   store,
   getAllBooks,
   getSingleBook,
