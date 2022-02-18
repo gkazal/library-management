@@ -4,6 +4,10 @@ export const studentsSummeryUrl = {
   studentsSummery: ROOT_URL + "librarian/students/get-students-summary",
 };
 
+export const booksSummeryUrl = {
+  booksSummery: ROOT_URL + "librarian/books/get-books-summary",
+};
+
 export const allStudentsUrl = {
   allStudents: ROOT_URL + "librarian/students/get-students",
   singleStudent: ROOT_URL + "librarian/students/get-students/:studentAccessId",
@@ -38,4 +42,5 @@ export const booksBorrowUrl = {
   booksBorrow: ROOT_URL + "librarian/books/get-AllBorrowers",
   addBorrower: ROOT_URL + "librarian/books/add-borrower",
   singleBorrower: ROOT_URL + "librarian/books/get-single-borrower/:id",
+  deleteBorrower: ROOT_URL + "librarian/books/delete-borrower/:id",
 };

@@ -9,7 +9,7 @@ import {
 } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { Box } from "@mui/system";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import BookCard from "../../../Shared/TotalCard/BookCard";
 import { AddButton, BookRequestText } from "../../../Styles/globalStyled";
 import DashboardTab from "../Dashboard/DashboardTab";
@@ -18,7 +18,8 @@ import ManageBookTable from "./ManageBookTable";
 import { Icon } from "@iconify/react";
 import SearchIcon from "@mui/icons-material/Search";
 import AddBook from "./AddBook";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
+import StudentCard from "../../../Shared/TotalCard/StudentCard";
 
 const useStyles = makeStyles({
   textField: {
@@ -59,11 +60,6 @@ const useStyles = makeStyles({
 const ManageBook = () => {
   const classes = useStyles();
 
-  // const dispatch = useDispatch();
-  // useEffect(() => {
-  //   dispatch(fetchAllDepartments());
-  // }, [dispatch]);
-
   const [open, setOpen] = useState(false);
 
   const handleClickOpen = () => {
@@ -74,10 +70,8 @@ const ManageBook = () => {
     setOpen(false);
   };
 
-  const totalBooks = useSelector(
-    (state) => state.booksAvailable.booksAvailable
-  );
-  console.log(totalBooks);
+  const bookSummary = useSelector((state) => state.booksSummery.booksSummery);
+  console.log(bookSummary);
 
   return (
     <>
@@ -88,12 +82,17 @@ const ManageBook = () => {
         <Grid item xl={8} lg={10} md={8} sm={11} xs={12}>
           <Box mt={10}>
             <Grid container justifyContent="center" spacing={5}>
-              <Grid item lg={3}>
-                <BookCard count={totalBooks.length} books={"Total Books"} />
-              </Grid>
-              <Grid item lg={3}>
-                <BookCard books={"Total Author"} />
-              </Grid>
+              {bookSummary?.map((item, i) =>
+                item?.title?.toLowerCase()?.includes("author") ? (
+                  <Grid item lg={3}>
+                    <StudentCard count={item.count} students={item.title} />
+                  </Grid>
+                ) : (
+                  <Grid item lg={3}>
+                    <BookCard count={item.count} books={item.title} />
+                  </Grid>
+                )
+              )}
             </Grid>
           </Box>
 

@@ -72,3 +72,26 @@ export const fetchBorrower =
       })
       .catch((err) => console.log(err));
   };
+
+export const deleteBorrower =
+  (id, cb = () => {}) =>
+  (dispatch) => {
+    fetch(booksBorrowUrl.deleteBorrower.replace(":id", id), {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      // body: JSON.stringify({ id: id }),
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        console.log(res);
+        if (res.status === "success") {
+          toast.success(res.message);
+
+          dispatch({ type: types.DELETE_BORROWER });
+          cb();
+        }
+      })
+      .catch((err) => console.log(err));
+  };

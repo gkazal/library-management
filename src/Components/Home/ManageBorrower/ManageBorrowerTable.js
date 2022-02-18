@@ -10,12 +10,18 @@ import { Box, Pagination, styled } from "@mui/material";
 import { useHistory } from "react-router-dom";
 import { tableCellClasses } from "@mui/material";
 import { useSelector } from "react-redux";
-import { ActionButton } from "../../../Styles/globalStyled";
+import {
+  ActionButton,
+  DeleteButton,
+  EditButton,
+} from "../../../Styles/globalStyled";
 import { useDispatch } from "react-redux";
 import {
+  deleteBorrower,
   fetchBooksBorrowed,
   fetchBorrower,
 } from "../../../store/actions/booksBorrowedAction";
+import swal from "sweetalert";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -69,6 +75,26 @@ const ManageBorrowerTable = () => {
     dispatch(fetchBooksBorrowed(value - 1));
   };
 
+  const deleteHandler = (id) => {
+    swal({
+      title: "Are you Delete?",
+      text: "Once deleted, you will not be able to this file!",
+      icon: "warning",
+      buttons: true,
+      dangerMode: true,
+    }).then((willDelete) => {
+      if (willDelete) {
+        dispatch(
+          deleteBorrower(id, () => {
+            dispatch(fetchBooksBorrowed());
+          })
+        );
+      } else {
+        swal("Your file is safe!");
+      }
+    });
+  };
+
   return (
     <>
       <TableContainer component={Paper}>
@@ -80,7 +106,7 @@ const ManageBorrowerTable = () => {
               <StyledTableCell align="left">Department</StyledTableCell>
               <StyledTableCell align="left">Contact</StyledTableCell>
               <StyledTableCell align="left">Email</StyledTableCell>
-              <StyledTableCell align="left">Action</StyledTableCell>
+              <StyledTableCell align="center">Action</StyledTableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -102,15 +128,20 @@ const ManageBorrowerTable = () => {
                   <StyledTableCell align="left">
                     {row?.student?.email}
                   </StyledTableCell>
-                  <StyledTableCell align="left">
-                    <Box>
+                  <StyledTableCell align="center">
+                    <Box sx={{ gap: "5px" }}>
                       <ActionButton
+                        sx={{ marginRight: "5px" }}
                         onClick={() =>
                           handleViewDetails(row.student.student_access_id)
                         }
                       >
-                        VIEW DETAILS
+                        View Details
                       </ActionButton>
+                      <EditButton sx={{ marginRight: "5px" }}>Edit</EditButton>
+                      <DeleteButton onClick={() => deleteHandler(row.id)}>
+                        Delete
+                      </DeleteButton>
                     </Box>
                   </StyledTableCell>
                 </StyledTableRow>

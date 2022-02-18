@@ -75,6 +75,7 @@ const MangeStudent = () => {
     (state) => state.inactiveStudents.inactiveStudents
   );
   const inactiveStudentsCount = inactiveStudents.length;
+  console.log(inactiveStudents);
 
   return (
     <>

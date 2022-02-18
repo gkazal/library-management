@@ -18,6 +18,10 @@ const booksBorrowed = (state = initialStates, action) => {
         ...state,
         singleBorrower: action.payload,
       };
+    case types.DELETE_BORROWER:
+      return {
+        ...state,
+      };
 
     default:
       return state;

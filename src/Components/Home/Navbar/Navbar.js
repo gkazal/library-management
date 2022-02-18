@@ -144,6 +144,9 @@ const Navbar = () => {
   const handleDepartment = () => {
     history.push("/department");
   };
+  const handleDashboard = () => {
+    history.push("/dashboard");
+  };
 
   return (
     <Grid container className={classes.root}>
@@ -151,7 +154,7 @@ const Navbar = () => {
         <Grid container className={classes.root1}>
           <Grid item xl={5} lg={4} md={4}>
             <Box mt={1}>
-              <img src={logo} alt="" />
+              <img src={logo} onClick={handleDashboard} alt="" />
             </Box>
           </Grid>
           <Grid item xl={7} lg={8} md={8}>

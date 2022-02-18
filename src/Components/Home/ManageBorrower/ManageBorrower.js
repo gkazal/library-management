@@ -135,7 +135,7 @@ const ManageBorrower = () => {
                   open={open}
                   onClose={handleClose}
                 >
-                  <DialogContent>
+                  <DialogContent sx={{ padding: 0 }}>
                     <AddBorrower close={handleClose} />
                   </DialogContent>
                 </Dialog>

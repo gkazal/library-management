@@ -50,7 +50,35 @@ export const ActionButton = withStyles(() => ({
     outline: "none !important",
     fontSize: "14px !important",
     fontWeight: "500!important",
-    width: "154px !important",
+    width: "144px !important",
+    height: "46px !important",
+  },
+}))(Button);
+export const EditButton = withStyles(() => ({
+  root: {
+    textTransform: "none !important",
+    color: "green !important",
+    padding: "10px !important",
+    borderRadius: "8px !important",
+    border: "1px solid green !important",
+    outline: "none !important",
+    fontSize: "14px !important",
+    fontWeight: "500!important",
+    width: "64px !important",
+    height: "46px !important",
+  },
+}))(Button);
+export const DeleteButton = withStyles(() => ({
+  root: {
+    textTransform: "none !important",
+    color: "red !important",
+    padding: "10px !important",
+    borderRadius: "8px !important",
+    border: "1px solid red !important",
+    outline: "none !important",
+    fontSize: "14px !important",
+    fontWeight: "500!important",
+    width: "64px !important",
     height: "46px !important",
   },
 }))(Button);

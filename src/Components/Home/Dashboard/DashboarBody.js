@@ -13,6 +13,7 @@ import { fetchInactiveStudents } from "../../../store/actions/inactiveStudentsAc
 import { fetchAllDepartments } from "../../../store/actions/allDepartmentsAction";
 import { fetchBooksAvailable } from "../../../store/actions/booksAvailableAction";
 import { fetchBooksBorrowed } from "../../../store/actions/booksBorrowedAction";
+import { fetchBooksSummery } from "../../../store/actions/booksSummeryAction";
 
 const useStyles = makeStyles({
   root: {
@@ -71,6 +72,10 @@ const DashboarBody = () => {
   }, [dispatch]);
 
   useEffect(() => {
+    dispatch(fetchBooksSummery());
+  }, [dispatch]);
+
+  useEffect(() => {
     dispatch(fetchAllStudents());
   }, [dispatch]);
 
@@ -89,10 +94,6 @@ const DashboarBody = () => {
   useEffect(() => {
     dispatch(fetchBooksBorrowed());
   }, [dispatch]);
-
-  const studentsSummery = useSelector(
-    (state) => state.studentsSummery.studentsSummery
-  );
 
   const allStudents = useSelector((state) => state.allStudents.allStudents);
   const studentCount = allStudents.length;

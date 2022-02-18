@@ -1,12 +1,4 @@
-import {
-  FormControl,
-  Grid,
-  InputLabel,
-  MenuItem,
-  Select,
-  TextField,
-  Typography,
-} from "@mui/material";
+import { Grid, TextField, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -27,6 +19,7 @@ const AddBook = () => {
     edition: "",
     self_no: "",
     row_no: "",
+    total_book: "",
     column_no: "",
   });
 
@@ -51,6 +44,7 @@ const AddBook = () => {
       edition: "",
       self_no: "",
       row_no: "",
+      total_book: "",
       column_no: "",
     }));
   };
@@ -187,6 +181,17 @@ const AddBook = () => {
           </Grid>
         </Grid>
         <Grid container spacing={2}>
+          <Grid item lg={6}>
+            <Typography mb={1} mt={2}>
+              Total Book
+            </Typography>
+            <TextField
+              variant="outlined"
+              fullWidth
+              value={input.total_book}
+              onChange={(e) => fieldChangeHandler("total_book", e.target.value)}
+            />
+          </Grid>
           <Grid item lg={6}>
             <Typography mb={1} mt={2}>
               Column No
